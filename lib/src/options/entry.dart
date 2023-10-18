@@ -8,22 +8,22 @@ part 'entry.mapper.dart';
 @MappableClass(caseStyle: CaseStyle.snakeCase, hook: MapOrListHook())
 class EntryOption with EntryOptionMappable {
   const EntryOption({
-    this.code = const [],
-    this.regex = const [],
+    this.className,
+    this.id,
     this.package,
     this.severity,
-    this.message,
+    this.reason,
   });
 
-  final List<String> code;
+  final String? className;
 
-  final List<String> regex;
+  final String? id;
 
   final String? package;
 
   @MappableField(hook: ErrorSeverityHook())
   final ErrorSeverity? severity;
-  final String? message;
+  final String? reason;
 
   static const fromJson = EntryOptionMapper.fromJson;
   static const fromMap = EntryOptionMapper.fromMap;

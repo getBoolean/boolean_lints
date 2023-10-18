@@ -19,40 +19,39 @@ class EntryOptionMapper extends ClassMapperBase<EntryOption> {
   @override
   final String id = 'EntryOption';
 
-  static List<String> _$code(EntryOption v) => v.code;
-  static const Field<EntryOption, List<String>> _f$code =
-      Field('code', _$code, opt: true, def: const []);
-  static List<String> _$regex(EntryOption v) => v.regex;
-  static const Field<EntryOption, List<String>> _f$regex =
-      Field('regex', _$regex, opt: true, def: const []);
+  static String? _$className(EntryOption v) => v.className;
+  static const Field<EntryOption, String> _f$className =
+      Field('className', _$className, key: 'class_name', opt: true);
+  static String? _$id(EntryOption v) => v.id;
+  static const Field<EntryOption, String> _f$id = Field('id', _$id, opt: true);
   static String? _$package(EntryOption v) => v.package;
   static const Field<EntryOption, String> _f$package =
       Field('package', _$package, opt: true);
   static ErrorSeverity? _$severity(EntryOption v) => v.severity;
   static const Field<EntryOption, ErrorSeverity> _f$severity =
       Field('severity', _$severity, opt: true, hook: ErrorSeverityHook());
-  static String? _$message(EntryOption v) => v.message;
-  static const Field<EntryOption, String> _f$message =
-      Field('message', _$message, opt: true);
+  static String? _$reason(EntryOption v) => v.reason;
+  static const Field<EntryOption, String> _f$reason =
+      Field('reason', _$reason, opt: true);
 
   @override
   final Map<Symbol, Field<EntryOption, dynamic>> fields = const {
-    #code: _f$code,
-    #regex: _f$regex,
+    #className: _f$className,
+    #id: _f$id,
     #package: _f$package,
     #severity: _f$severity,
-    #message: _f$message,
+    #reason: _f$reason,
   };
 
   @override
   final MappingHook hook = const MapOrListHook();
   static EntryOption _instantiate(DecodingData data) {
     return EntryOption(
-        code: data.dec(_f$code),
-        regex: data.dec(_f$regex),
+        className: data.dec(_f$className),
+        id: data.dec(_f$id),
         package: data.dec(_f$package),
         severity: data.dec(_f$severity),
-        message: data.dec(_f$message));
+        reason: data.dec(_f$reason));
   }
 
   @override
@@ -108,14 +107,12 @@ extension EntryOptionValueCopy<$R, $Out>
 
 abstract class EntryOptionCopyWith<$R, $In extends EntryOption, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get code;
-  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get regex;
   $R call(
-      {List<String>? code,
-      List<String>? regex,
+      {String? className,
+      String? id,
       String? package,
       ErrorSeverity? severity,
-      String? message});
+      String? reason});
   EntryOptionCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -128,34 +125,26 @@ class _EntryOptionCopyWithImpl<$R, $Out>
   late final ClassMapperBase<EntryOption> $mapper =
       EntryOptionMapper.ensureInitialized();
   @override
-  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get code =>
-      ListCopyWith($value.code, (v, t) => ObjectCopyWith(v, $identity, t),
-          (v) => call(code: v));
-  @override
-  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get regex =>
-      ListCopyWith($value.regex, (v, t) => ObjectCopyWith(v, $identity, t),
-          (v) => call(regex: v));
-  @override
   $R call(
-          {List<String>? code,
-          List<String>? regex,
+          {Object? className = $none,
+          Object? id = $none,
           Object? package = $none,
           Object? severity = $none,
-          Object? message = $none}) =>
+          Object? reason = $none}) =>
       $apply(FieldCopyWithData({
-        if (code != null) #code: code,
-        if (regex != null) #regex: regex,
+        if (className != $none) #className: className,
+        if (id != $none) #id: id,
         if (package != $none) #package: package,
         if (severity != $none) #severity: severity,
-        if (message != $none) #message: message
+        if (reason != $none) #reason: reason
       }));
   @override
   EntryOption $make(CopyWithData data) => EntryOption(
-      code: data.get(#code, or: $value.code),
-      regex: data.get(#regex, or: $value.regex),
+      className: data.get(#className, or: $value.className),
+      id: data.get(#id, or: $value.id),
       package: data.get(#package, or: $value.package),
       severity: data.get(#severity, or: $value.severity),
-      message: data.get(#message, or: $value.message));
+      reason: data.get(#reason, or: $value.reason));
 
   @override
   EntryOptionCopyWith<$R2, EntryOption, $Out2> $chain<$R2, $Out2>(

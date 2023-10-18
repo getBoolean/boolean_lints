@@ -15,3 +15,19 @@ boolean_lints:
     - avoid_hardcoded_strings:
         - minimum_length: 3
         - severity: warning
+    - banned_code:
+        - severity: warning
+        - entries:
+            - class_name: BannedCodeUsage
+              id: test
+              reason: "Banned code usage is not allowed"
+              package: example
+            - class_name: BannedCodeUsage
+              id: test2
+              reason: "Banned code usage 2 is not allowed"
+              package: example
+            - class_name: BannedCodeUsage
+              id: test3
+              reason: "Banned code usage 3 is not allowed"
+              severity: error
+              package: example
