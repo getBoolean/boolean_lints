@@ -1,6 +1,6 @@
-import 'package:custom_lints_template/src/options/avoid_hardcoded_strings.dart';
-import 'package:custom_lints_template/src/options/custom_lint_example.dart';
-import 'package:custom_lints_template/src/options/hooks/map_or_list_hook.dart';
+import 'package:boolean_lints/src/options/avoid_hardcoded_strings.dart';
+import 'package:boolean_lints/src/options/custom_lint_example.dart';
+import 'package:boolean_lints/src/options/hooks/map_or_list_hook.dart';
 import 'package:dart_mappable/dart_mappable.dart';
 
 part 'rules.mapper.dart';

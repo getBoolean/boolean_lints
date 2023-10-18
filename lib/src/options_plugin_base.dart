@@ -4,9 +4,9 @@ import 'dart:io';
 import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:analyzer/source/source_range.dart';
+import 'package:boolean_lints/src/options.dart';
+import 'package:boolean_lints/src/utils/extensions.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
-import 'package:custom_lints_template/src/options.dart';
-import 'package:custom_lints_template/src/utils/extensions.dart';
 import 'package:path/path.dart';
 import 'package:yaml/yaml.dart';
 
@@ -176,7 +176,7 @@ Future<Map<String, dynamic>?> _getLintOptionsMap(String filepath) async {
 Future<Map<String, dynamic>?> _findLintOptions(File file) async {
   final contents = await file.readAsString();
   final yamlMap = loadYaml(contents, sourceUrl: file.uri) as YamlMap;
-  final dynamic booleanLintsField = yamlMap['custom_lints_template'];
+  final dynamic booleanLintsField = yamlMap['boolean_lints'];
   if (booleanLintsField is YamlMap) {
     return booleanLintsField.toMap();
   }

@@ -11,11 +11,11 @@ environment:
 
 dev_dependencies:
   custom_lint: ^0.5.3
-  custom_lints_template:
+  boolean_lints:
     path: ../
   lints: ^2.0.0
   test: ^1.21.0
-# custom_lints_template:
+# boolean_lints:
 #   rules:
 #     avoid_banned_filenames:
 #       entries:

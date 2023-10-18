@@ -8,7 +8,7 @@ custom_lint:
   rules:
     - avoid_hardcoded_strings: true
 
-custom_lints_template:
+boolean_lints:
   rules_exclude:
     - ".*excluded\\.dart"
   rules:

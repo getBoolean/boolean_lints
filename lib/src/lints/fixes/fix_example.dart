@@ -1,7 +1,7 @@
 import 'package:analyzer/error/error.dart';
+import 'package:boolean_lints/src/options.dart';
+import 'package:boolean_lints/src/options_plugin_base.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
-import 'package:custom_lints_template/src/options.dart';
-import 'package:custom_lints_template/src/options_plugin_base.dart';
 
 class FixExampleFix extends OptionsFix {
   @override

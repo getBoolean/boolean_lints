@@ -21,7 +21,7 @@ All lints have the following options:
 - `exclude`: Skip linting files matching these regular expressions.
 
 ```yaml
-custom_lints_template:
+boolean_lints:
   rules:
     example_lint_code:
       severity: info
@@ -41,7 +41,7 @@ Info. Avoid hardcoding strings. Use a localization package or append ".hardcoded
 This lint is designed for `flutter_localizations` from the Flutter SDK.
 
 ```yaml
-custom_lints_template:
+boolean_lints:
   rules:
     avoid_hardcoded_strings:
       minimum_length: 0
