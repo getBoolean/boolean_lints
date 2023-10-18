@@ -172,6 +172,8 @@ dart run custom_lint
 Most lints have configuration options. These can be specified in the `analysis_options.yaml` or the `pubspec.yaml`.
 See [LINTS.md](docs/LINTS.md) for a list of implemented lint rules and their configuration options.
 
+- [banned_code](docs/LINTS.md#banned_code)
+
 ## Contributing Guide
 
 ### Creating Lints
