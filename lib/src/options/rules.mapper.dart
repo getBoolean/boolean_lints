@@ -14,6 +14,7 @@ class RulesOptionMapper extends ClassMapperBase<RulesOption> {
       MapperContainer.globals.use(_instance = RulesOptionMapper._());
       AvoidHardcodedStringsOptionMapper.ensureInitialized();
       CustomLintExampleOptionMapper.ensureInitialized();
+      BannedCodeOptionMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -36,11 +37,16 @@ class RulesOptionMapper extends ClassMapperBase<RulesOption> {
           key: 'custom_lint_example',
           opt: true,
           def: const CustomLintExampleOption());
+  static BannedCodeOption _$bannedCode(RulesOption v) => v.bannedCode;
+  static const Field<RulesOption, BannedCodeOption> _f$bannedCode = Field(
+      'bannedCode', _$bannedCode,
+      key: 'banned_code', opt: true, def: const BannedCodeOption());
 
   @override
   final Map<Symbol, Field<RulesOption, dynamic>> fields = const {
     #avoidHardcodedStrings: _f$avoidHardcodedStrings,
     #customLintExample: _f$customLintExample,
+    #bannedCode: _f$bannedCode,
   };
 
   @override
@@ -48,7 +54,8 @@ class RulesOptionMapper extends ClassMapperBase<RulesOption> {
   static RulesOption _instantiate(DecodingData data) {
     return RulesOption(
         avoidHardcodedStrings: data.dec(_f$avoidHardcodedStrings),
-        customLintExample: data.dec(_f$customLintExample));
+        customLintExample: data.dec(_f$customLintExample),
+        bannedCode: data.dec(_f$bannedCode));
   }
 
   @override
@@ -108,9 +115,12 @@ abstract class RulesOptionCopyWith<$R, $In extends RulesOption, $Out>
       AvoidHardcodedStringsOption> get avoidHardcodedStrings;
   CustomLintExampleOptionCopyWith<$R, CustomLintExampleOption,
       CustomLintExampleOption> get customLintExample;
+  BannedCodeOptionCopyWith<$R, BannedCodeOption, BannedCodeOption>
+      get bannedCode;
   $R call(
       {AvoidHardcodedStringsOption? avoidHardcodedStrings,
-      CustomLintExampleOption? customLintExample});
+      CustomLintExampleOption? customLintExample,
+      BannedCodeOption? bannedCode});
   RulesOptionCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -133,20 +143,27 @@ class _RulesOptionCopyWithImpl<$R, $Out>
       get customLintExample => $value.customLintExample.copyWith
           .$chain((v) => call(customLintExample: v));
   @override
+  BannedCodeOptionCopyWith<$R, BannedCodeOption, BannedCodeOption>
+      get bannedCode =>
+          $value.bannedCode.copyWith.$chain((v) => call(bannedCode: v));
+  @override
   $R call(
           {AvoidHardcodedStringsOption? avoidHardcodedStrings,
-          CustomLintExampleOption? customLintExample}) =>
+          CustomLintExampleOption? customLintExample,
+          BannedCodeOption? bannedCode}) =>
       $apply(FieldCopyWithData({
         if (avoidHardcodedStrings != null)
           #avoidHardcodedStrings: avoidHardcodedStrings,
-        if (customLintExample != null) #customLintExample: customLintExample
+        if (customLintExample != null) #customLintExample: customLintExample,
+        if (bannedCode != null) #bannedCode: bannedCode
       }));
   @override
   RulesOption $make(CopyWithData data) => RulesOption(
       avoidHardcodedStrings:
           data.get(#avoidHardcodedStrings, or: $value.avoidHardcodedStrings),
       customLintExample:
-          data.get(#customLintExample, or: $value.customLintExample));
+          data.get(#customLintExample, or: $value.customLintExample),
+      bannedCode: data.get(#bannedCode, or: $value.bannedCode));
 
   @override
   RulesOptionCopyWith<$R2, RulesOption, $Out2> $chain<$R2, $Out2>(
