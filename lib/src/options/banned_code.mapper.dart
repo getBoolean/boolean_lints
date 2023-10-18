@@ -29,10 +29,9 @@ class BannedCodeOptionMapper extends ClassMapperBase<BannedCodeOption> {
   static List<String> _$include(BannedCodeOption v) => v.include;
   static const Field<BannedCodeOption, List<String>> _f$include =
       Field('include', _$include, opt: true, def: const []);
-  static ErrorSeverity _$severity(BannedCodeOption v) => v.severity;
-  static const Field<BannedCodeOption, ErrorSeverity> _f$severity = Field(
-      'severity', _$severity,
-      opt: true, def: ErrorSeverity.WARNING, hook: ErrorSeverityHook());
+  static ErrorSeverity? _$severity(BannedCodeOption v) => v.severity;
+  static const Field<BannedCodeOption, ErrorSeverity> _f$severity =
+      Field('severity', _$severity, opt: true, hook: ErrorSeverityHook());
 
   @override
   final Map<Symbol, Field<BannedCodeOption, dynamic>> fields = const {
@@ -147,12 +146,12 @@ class _BannedCodeOptionCopyWithImpl<$R, $Out>
           {List<EntryOption>? entries,
           List<String>? exclude,
           List<String>? include,
-          ErrorSeverity? severity}) =>
+          Object? severity = $none}) =>
       $apply(FieldCopyWithData({
         if (entries != null) #entries: entries,
         if (exclude != null) #exclude: exclude,
         if (include != null) #include: include,
-        if (severity != null) #severity: severity
+        if (severity != $none) #severity: severity
       }));
   @override
   BannedCodeOption $make(CopyWithData data) => BannedCodeOption(

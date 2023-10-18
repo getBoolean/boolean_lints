@@ -13,7 +13,7 @@ class BannedCodeOption with BannedCodeOptionMappable, OptionsMixin {
     this.entries = const [],
     this.exclude = const [],
     this.include = const [],
-    this.severity = ErrorSeverity.WARNING,
+    this.severity,
   });
 
   final List<EntryOption> entries;
@@ -25,7 +25,7 @@ class BannedCodeOption with BannedCodeOptionMappable, OptionsMixin {
   final List<String> include;
 
   @MappableField(hook: ErrorSeverityHook())
-  final ErrorSeverity severity;
+  final ErrorSeverity? severity;
 
   static const fromJson = BannedCodeOptionMapper.fromJson;
   static const fromMap = BannedCodeOptionMapper.fromMap;

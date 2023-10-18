@@ -1,6 +1,8 @@
 import 'package:analyzer/dart/ast/ast.dart';
+import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:boolean_lints/src/options.dart';
+import 'package:boolean_lints/src/options/banned_code.dart';
 import 'package:boolean_lints/src/options/entry.dart';
 import 'package:boolean_lints/src/options_plugin_base.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
@@ -11,6 +13,7 @@ class BannedCodeRule extends OptionsLintRule {
   static const _code = LintCode(
     name: 'banned_code',
     problemMessage: 'Usage of this has been discouraged by your project.',
+    errorSeverity: ErrorSeverity.WARNING,
   );
 
   @override
@@ -24,9 +27,8 @@ class BannedCodeRule extends OptionsLintRule {
       return;
     }
 
-    final severity = options.rules.bannedCode.severity;
+    final BannedCodeOption(:entries, :severity) = options.rules.bannedCode;
     final lintCode = code.copyWith(errorSeverity: severity);
-    final entries = options.rules.bannedCode.entries;
     for (final entry in entries) {
       final EntryOption(:id, :className, :package, :severity, :reason) = entry;
       final entryCode =
