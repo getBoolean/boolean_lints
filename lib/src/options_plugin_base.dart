@@ -5,7 +5,6 @@ import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:analyzer/source/source_range.dart';
 import 'package:boolean_lints/src/options.dart';
-import 'package:boolean_lints/src/utils/extensions.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:path/path.dart';
 import 'package:yaml/yaml.dart';
