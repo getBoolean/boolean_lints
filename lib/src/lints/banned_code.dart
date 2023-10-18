@@ -27,12 +27,22 @@ class BannedCodeRule extends OptionsLintRule {
       return;
     }
 
+    // TODO: only id
+    // TODO: only className
+    // TODO: only package
+    // TODO: only className and package
+    // TODO: only id and package
+    // only id and className
+    // id and className and package
     final BannedCodeOption(:entries, :severity) = options.rules.bannedCode;
     final lintCode = code.copyWith(errorSeverity: severity);
     for (final entry in entries) {
       final EntryOption(:id, :className, :package, :severity, :reason) = entry;
       final entryCode =
           lintCode.copyWith(errorSeverity: severity, problemMessage: reason);
+      if (id == null) {
+        return;
+      }
 
       // lint the node if the id matches for method calls
       context.registry.addSimpleIdentifier((node) {
