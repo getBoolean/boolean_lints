@@ -49,7 +49,7 @@ class BannedCodeRule extends OptionsLintRule {
             final parentSource = parentElement?.librarySource;
             if (package != null) {
               final parentSourceName = parentSource?.uri.toString();
-              if (matchesPackage(parentSourceName, package)) {
+              if (!matchesPackage(parentSourceName, package)) {
                 return;
               }
             }
@@ -73,7 +73,7 @@ class BannedCodeRule extends OptionsLintRule {
             final parentSource = parentEntity.element?.librarySource;
             if (package != null) {
               final parentSourceName = parentSource?.uri.toString();
-              if (matchesPackage(parentSourceName, package)) {
+              if (!matchesPackage(parentSourceName, package)) {
                 return;
               }
             }
