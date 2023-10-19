@@ -28,7 +28,14 @@ jobs:
           architecture: x64
       
       - name: Get Packages
-        run: dart pub get
+        run: |
+          dart pub get
+          cd example/random
+          dart pub get
+          cd ../..
+          cd example/banned_code/id_class_package
+          dart pub get
+          cd ../../..
 
       - name: Verify Formatting
         run: dart format --set-exit-if-changed .
