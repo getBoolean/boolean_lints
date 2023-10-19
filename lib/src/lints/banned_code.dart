@@ -27,6 +27,8 @@ class BannedCodeRule extends OptionsLintRule {
       return;
     }
 
+    // TODO: Check id works for fields/getters/global vars/global methods
+
     // TODO: only id
     // TODO: only className
     // TODO: only package
@@ -40,8 +42,31 @@ class BannedCodeRule extends OptionsLintRule {
       final EntryOption(:id, :className, :package, :severity, :reason) = entry;
       final entryCode =
           lintCode.copyWith(errorSeverity: severity, problemMessage: reason);
-      if (id == null) {
-        return;
+
+      switch (entry) {
+        // all non null
+        case EntryOption(:final id?, :final className?, :final package?):
+          break;
+
+        // two non nulls
+        case EntryOption(:final className?, :final package?):
+          break;
+        case EntryOption(:final id?, :final className?):
+          break;
+        case EntryOption(:final id?, :final package?):
+          break;
+
+        // one non null
+        case EntryOption(:final package?):
+          break;
+        case EntryOption(:final className?):
+          break;
+        case EntryOption(:final id?):
+          break;
+
+        // all null
+        case EntryOption():
+          break;
       }
 
       // lint the node if the id matches for method calls
