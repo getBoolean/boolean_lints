@@ -7,13 +7,6 @@ on:
       - feature/*
       - fix/*
       - chore/*
-  pull_request:
-    branches:
-      - main
-      - release
-      - feature/*
-      - fix/*
-      - chore/*
 
 env:
   FLUTTER_CHANNEL: "stable"
