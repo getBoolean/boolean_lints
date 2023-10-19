@@ -11,6 +11,7 @@ void testingBannedCodeLint() {
   BannedCodeUsage.test3().test();
   bannedCodeUsage2.test();
   print(test2);
+  print(bannedCodeUsage2.test4);
   test();
 }
 
@@ -26,6 +27,8 @@ class BannedCodeUsage {
     print('Hello World'.hardcoded);
     return 'Hello World'.hardcoded;
   }
+
+  final String test4 = 'Hello World'.hardcoded;
 
   void test() {
     print('Hello World'.hardcoded);

@@ -24,6 +24,9 @@ boolean_lints:
         # - id: test2
         #   class_name: BannedCodeUsage
         #   reason: "BannedCodeUsage.test2 is not allowed"
+        # - id: test4
+        #   class_name: BannedCodeUsage
+        #   reason: "BannedCodeUsage.test4 is not allowed"
         # - id: test
         #   class_name: BannedCodeUsage
         #   reason: "BannedCodeUsage.test is not allowed"
@@ -58,15 +61,15 @@ boolean_lints:
         # - id: test
         #   class_name: BannedCodeUsage
         #   reason: "BannedCodeUsage.test is not allowed"
-        - id: test3
-          class_name: BannedCodeUsage
-          package: example
-          reason: "BannedCodeUsage.test3 from the example package is not allowed"
-        - id: test2
-          class_name: BannedCodeUsage
-          package: example
-          reason: "BannedCodeUsage.test2 from the example package is not allowed"
-        - id: test
-          class_name: BannedCodeUsage
-          package: example
-          reason: "BannedCodeUsage.test from the example package is not allowed"
+        # - id: test3
+        #   class_name: BannedCodeUsage
+        #   package: example
+        #   reason: "BannedCodeUsage.test3 from the example package is not allowed"
+        # - id: test2
+        #   class_name: BannedCodeUsage
+        #   package: example
+        #   reason: "BannedCodeUsage.test2 from the example package is not allowed"
+        # - id: test
+        #   class_name: BannedCodeUsage
+        #   package: example
+        #   reason: "BannedCodeUsage.test from the example package is not allowed"
