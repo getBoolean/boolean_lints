@@ -279,6 +279,7 @@ class BannedCodeLinter {
       final entityBeforeNode =
           parent!.childEntities.firstWhere((element) => element != node);
       switch (entityBeforeNode) {
+        case InstanceCreationExpression(:final staticType?):
         case SimpleIdentifier(:final staticType?):
           final parentTypeName =
               staticType.getDisplayString(withNullability: false);
@@ -318,6 +319,7 @@ class BannedCodeLinter {
       final entityBeforeNode =
           parent!.childEntities.firstWhere((element) => element != node);
       switch (entityBeforeNode) {
+        case InstanceCreationExpression(:final staticType?):
         case SimpleIdentifier(:final staticType?):
           final parentTypeName =
               staticType.getDisplayString(withNullability: false);
@@ -375,6 +377,7 @@ class BannedCodeLinter {
       final entityBeforeNode =
           parent!.childEntities.firstWhere((element) => element != node);
       switch (entityBeforeNode) {
+        case InstanceCreationExpression(:final staticType?):
         case SimpleIdentifier(:final staticType?):
           final parentTypeName =
               staticType.getDisplayString(withNullability: false);
