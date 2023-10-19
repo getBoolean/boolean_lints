@@ -18,16 +18,30 @@ boolean_lints:
     banned_code:
       severity: warning
       entries:
-        - class_name: BannedCodeUsage
-          id: test
-          reason: "Banned code usage is not allowed"
-          package: example
-        - class_name: BannedCodeUsage
+        - package: example
           id: test2
-          reason: "Banned code usage 2 is not allowed"
-          package: example
-        - class_name: BannedCodeUsage
-          id: test3
-          reason: "Banned code usage 3 is not allowed"
-          severity: error
-          package: example
+          reason: Do not use test2 from the example package
+        - package: example
+          id: test
+          reason: Do not use test from the example package
+        # - package: example
+        #   reason: Do not use the example package
+        # - id: test
+        #   reason: "test methods are not allowed"
+        # - id: test2
+        #   reason: "test2 methods not allowed"
+        # - class_name: BannedCodeUsage
+        #   reason: "BannedCodeUsage is not allowed"
+        # - class_name: BannedCodeUsage
+        #   id: test
+        #   reason: "Banned code usage is not allowed"
+        #   package: example
+        # - class_name: BannedCodeUsage
+        #   id: test2
+        #   reason: "Banned code usage 2 is not allowed"
+        #   package: example
+        # - class_name: BannedCodeUsage
+        #   id: test3
+        #   reason: "Banned code usage 3 is not allowed"
+        #   severity: error
+        #   package: example

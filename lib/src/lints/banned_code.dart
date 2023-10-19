@@ -1,4 +1,5 @@
 import 'package:analyzer/dart/ast/ast.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:boolean_lints/src/options.dart';
@@ -50,15 +51,15 @@ class BannedCodeRule extends OptionsLintRule {
       switch (entry) {
         // all non null
         case EntryOption(:final id?, :final className?, :final package?):
-          break;
+          linter.banIdFromClassFromPackage(entryCode, id, className, package);
 
         // two non nulls
         case EntryOption(:final className?, :final package?):
-          break;
+          linter.banClassFromPackage(entryCode, className, package);
         case EntryOption(:final id?, :final className?):
-          break;
+          linter.banIdFromClass(entryCode, id, className);
         case EntryOption(:final id?, :final package?):
-          break;
+          linter.banIdFromPackage(entryCode, id, package);
 
         // one non null
         case EntryOption(:final package?):
@@ -241,4 +242,44 @@ class BannedCodeLinter {
       reporter.reportErrorForNode(entryCode, node);
     });
   }
+
+  void banIdFromPackage(LintCode entryCode, String id, String package) {
+    // only match globals
+    context.registry.addSimpleIdentifier((node) {
+      final name = node.name;
+      if (name != id) {
+        return;
+      }
+
+      final parentSource = node.staticElement?.librarySource;
+      final parentSourceName = parentSource?.uri.toString();
+      if (!_matchesPackage(parentSourceName, package)) {
+        return;
+      }
+
+      if (node.parent is ConstructorDeclaration) {
+        return;
+      }
+
+      switch (node.staticElement) {
+        case FunctionElement() || PropertyAccessorElement():
+          reporter.reportErrorForNode(entryCode, node);
+      }
+    });
+  }
+
+  void banIdFromClass(LintCode entryCode, String id, String className) {}
+
+  void banClassFromPackage(
+    LintCode entryCode,
+    String className,
+    String package,
+  ) {}
+
+  void banIdFromClassFromPackage(
+    LintCode entryCode,
+    String id,
+    String className,
+    String package,
+  ) {}
 }
