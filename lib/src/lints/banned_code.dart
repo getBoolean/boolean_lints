@@ -35,8 +35,6 @@ class BannedCodeRule extends OptionsLintRule {
       options: options,
     );
 
-    // TODO: Check id works for fields/getters/global vars/global methods
-
     final BannedCodeOption(
       :entries,
       severity: ruleSeverity,
