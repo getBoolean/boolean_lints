@@ -285,16 +285,26 @@ class BannedCodeLinter {
           if (parentTypeName != className) {
             return;
           }
+
+          reporter.reportErrorForNode(entryCode, node.parent ?? node);
         case SimpleIdentifier(:final staticElement?):
           final parentElementName = staticElement.name;
           if (parentElementName != className) {
             return;
           }
+
+          reporter.reportErrorForNode(entryCode, node.parent ?? node);
+        case NamedType(:final element?):
+          final parentTypeName = element.name;
+          if (parentTypeName != className) {
+            return;
+          }
+
+          reporter.reportErrorForNode(
+              entryCode, node.parent?.parent ?? node.parent ?? node);
         default:
           return;
       }
-
-      reporter.reportErrorForNode(entryCode, node);
     });
   }
 
@@ -354,5 +364,58 @@ class BannedCodeLinter {
     String id,
     String className,
     String package,
-  ) {}
+  ) {
+    context.registry.addSimpleIdentifier((node) {
+      final name = node.name;
+      if (name != id) {
+        return;
+      }
+
+      final parent = node.parent;
+      final entityBeforeNode =
+          parent!.childEntities.firstWhere((element) => element != node);
+      switch (entityBeforeNode) {
+        case SimpleIdentifier(:final staticType?):
+          final parentTypeName =
+              staticType.getDisplayString(withNullability: false);
+          if (parentTypeName != className) {
+            return;
+          }
+
+          final parentSourceName = getParentSource(node);
+          if (_matchesPackage(parentSourceName, package)) {
+            reporter.reportErrorForNode(entryCode, node.parent ?? node);
+          }
+        case SimpleIdentifier(:final staticElement?):
+          final parentElementName = staticElement.name;
+          if (parentElementName != className) {
+            return;
+          }
+
+          final parentSourceName = getParentSource(node);
+          if (_matchesPackage(parentSourceName, package)) {
+            reporter.reportErrorForNode(entryCode, node.parent ?? node);
+          }
+        case NamedType(:final element?):
+          final parentTypeName = element.name;
+          if (parentTypeName != className) {
+            return;
+          }
+
+          final parentSourceName = getParentSource(node);
+          if (_matchesPackage(parentSourceName, package)) {
+            reporter.reportErrorForNode(
+                entryCode, node.parent?.parent ?? node.parent ?? node);
+          }
+        default:
+          return;
+      }
+    });
+  }
+
+  String? getParentSource(SimpleIdentifier node) {
+    final parentSource = node.staticElement?.librarySource;
+    final parentSourceName = parentSource?.uri.toString();
+    return parentSourceName;
+  }
 }

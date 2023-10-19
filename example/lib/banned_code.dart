@@ -8,6 +8,7 @@ void testingBannedCodeLint() {
   bannedCodeUsage.test();
 
   final bannedCodeUsage2 = BannedCodeUsage.test3();
+  BannedCodeUsage.test3().test();
   bannedCodeUsage2.test();
   print(test2);
   test();
