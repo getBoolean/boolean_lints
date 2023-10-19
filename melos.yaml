@@ -3,6 +3,7 @@ name: boolean_lints
 packages:
   - packages/**
   - example/**
+  - .
 
 scripts:
   # Custom lint is only applied to the packages and not the root app because of a dependency conflict with `integration_test` and `melos`
