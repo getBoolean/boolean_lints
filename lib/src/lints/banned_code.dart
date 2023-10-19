@@ -73,65 +73,6 @@ class BannedCodeRule extends OptionsLintRule {
         case EntryOption():
           break;
       }
-
-      // lint the node if the id matches for method calls
-      // context.registry.addSimpleIdentifier((node) {
-      //   final name = node.name;
-      //   if (name != id) {
-      //     return;
-      //   }
-
-      //   if (className != null) {
-      //     final parent = node.parent;
-      //     final parentEntity =
-      //         parent!.childEntities.firstWhere((element) => element != node);
-      //     if (parentEntity is SimpleIdentifier) {
-      //       final parentType = parentEntity.staticType;
-      //       final parentElement = parentEntity.staticElement;
-      //       final parentSource = parentElement?.librarySource;
-      //       if (package != null) {
-      //         final parentSourceName = parentSource?.uri.toString();
-      //         if (!matchesPackage(parentSourceName, package)) {
-      //           return;
-      //         }
-      //       }
-
-      //       if (parentType != null) {
-      //         final parentTypeName =
-      //             parentType.getDisplayString(withNullability: false);
-      //         if (parentTypeName != className) {
-      //           return;
-      //         }
-      //       } else if (parentElement != null) {
-      //         final parentElementName = parentElement.name;
-      //         if (parentElementName != className) {
-      //           return;
-      //         }
-      //       } else {
-      //         return;
-      //       }
-      //     } else if (parentEntity is NamedType) {
-      //       final parentTypeName = parentEntity.name2.lexeme;
-      //       final parentSource = parentEntity.element?.librarySource;
-      //       if (package != null) {
-      //         final parentSourceName = parentSource?.uri.toString();
-      //         if (!matchesPackage(parentSourceName, package)) {
-      //           return;
-      //         }
-      //       }
-
-      //       if (parentTypeName != className) {
-      //         return;
-      //       }
-      //     } else {
-      //       return;
-      //     }
-      //   }
-
-      //   // check if the package name matches the node's source file package
-
-      //   reporter.reportErrorForNode(entryCode, node);
-      // });
     }
   }
 
