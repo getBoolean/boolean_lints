@@ -276,27 +276,22 @@ class BannedCodeLinter {
       }
 
       final parent = node.parent;
-      final parentEntity =
+      final entityBeforeNode =
           parent!.childEntities.firstWhere((element) => element != node);
-      if (parentEntity is SimpleIdentifier) {
-        final parentType = parentEntity.staticType;
-        final parentElement = parentEntity.staticElement;
-        if (parentType != null) {
+      switch (entityBeforeNode) {
+        case SimpleIdentifier(:final staticType?):
           final parentTypeName =
-              parentType.getDisplayString(withNullability: false);
+              staticType.getDisplayString(withNullability: false);
           if (parentTypeName != className) {
             return;
           }
-        } else if (parentElement != null) {
-          final parentElementName = parentElement.name;
+        case SimpleIdentifier(:final staticElement?):
+          final parentElementName = staticElement.name;
           if (parentElementName != className) {
             return;
           }
-        } else {
+        default:
           return;
-        }
-      } else {
-        return;
       }
 
       reporter.reportErrorForNode(entryCode, node);
