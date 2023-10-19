@@ -62,7 +62,7 @@ class BannedCodeRule extends OptionsLintRule {
 
         // one non null
         case EntryOption(:final package?):
-          break;
+          linter.banPackage(entryCode, package);
         case EntryOption(:final className?):
           linter.banClassName(entryCode, className);
         case EntryOption(:final id?):
@@ -134,10 +134,6 @@ class BannedCodeRule extends OptionsLintRule {
     }
   }
 
-  bool matchesPackage(String? parentSourceName, String package) {
-    return parentSourceName?.startsWith('package:$package') ?? false;
-  }
-
   @override
   List<Fix> getFixes() => [];
 }
@@ -154,6 +150,10 @@ class BannedCodeLinter {
   final ErrorReporter reporter;
   final CustomLintContext context;
   final Options options;
+
+  bool _matchesPackage(String? parentSourceName, String package) {
+    return parentSourceName?.startsWith('package:$package') ?? false;
+  }
 
   void banId(
     LintCode code,
@@ -213,6 +213,32 @@ class BannedCodeLinter {
       }
 
       reporter.reportErrorForNode(code, node);
+    });
+  }
+
+  void banPackage(LintCode entryCode, String package) {
+    context.registry.addSimpleIdentifier((node) {
+      final parentSource = node.staticElement?.librarySource;
+      final parentSourceName = parentSource?.uri.toString();
+      if (!_matchesPackage(parentSourceName, package)) {
+        return;
+      }
+
+      if (node.parent is ConstructorDeclaration) {
+        return;
+      }
+
+      reporter.reportErrorForNode(entryCode, node);
+    });
+
+    context.registry.addNamedType((node) {
+      final parentSource = node.element?.librarySource;
+      final parentSourceName = parentSource?.uri.toString();
+      if (!_matchesPackage(parentSourceName, package)) {
+        return;
+      }
+
+      reporter.reportErrorForNode(entryCode, node);
     });
   }
 }
