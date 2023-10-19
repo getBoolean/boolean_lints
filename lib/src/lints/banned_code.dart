@@ -160,8 +160,7 @@ class BannedCodeLinter {
 
   void banPackage(LintCode entryCode, String package) {
     context.registry.addSimpleIdentifier((node) {
-      final parentSource = node.staticElement?.librarySource;
-      final parentSourceName = parentSource?.uri.toString();
+      final parentSourceName = node.parentSourceUrl;
       if (!_matchesPackage(parentSourceName, package)) {
         return;
       }
@@ -174,8 +173,7 @@ class BannedCodeLinter {
     });
 
     context.registry.addNamedType((node) {
-      final parentSource = node.element?.librarySource;
-      final parentSourceName = parentSource?.uri.toString();
+      final parentSourceName = node.parentSourceUrl;
       if (!_matchesPackage(parentSourceName, package)) {
         return;
       }
@@ -192,8 +190,7 @@ class BannedCodeLinter {
         return;
       }
 
-      final parentSource = node.staticElement?.librarySource;
-      final parentSourceName = parentSource?.uri.toString();
+      final parentSourceName = node.parentSourceUrl;
       if (!_matchesPackage(parentSourceName, package)) {
         return;
       }
@@ -276,8 +273,7 @@ class BannedCodeLinter {
           return;
       }
 
-      final parentSource = node.staticElement?.librarySource;
-      final parentSourceName = parentSource?.uri.toString();
+      final parentSourceName = node.parentSourceUrl;
       if (!_matchesPackage(parentSourceName, package)) {
         return;
       }
@@ -326,7 +322,7 @@ class BannedCodeLinter {
             return;
           }
 
-          final parentSourceName = getParentSource(node);
+          final parentSourceName = node.parentSourceUrl;
           if (_matchesPackage(parentSourceName, package)) {
             reporter.reportErrorForNode(entryCode, node.parent ?? node);
           }
@@ -336,7 +332,7 @@ class BannedCodeLinter {
             return;
           }
 
-          final parentSourceName = getParentSource(node);
+          final parentSourceName = node.parentSourceUrl;
           if (_matchesPackage(parentSourceName, package)) {
             reporter.reportErrorForNode(entryCode, node.parent ?? node);
           }
@@ -346,7 +342,7 @@ class BannedCodeLinter {
             return;
           }
 
-          final parentSourceName = getParentSource(node);
+          final parentSourceName = node.parentSourceUrl;
           if (_matchesPackage(parentSourceName, package)) {
             reporter.reportErrorForNode(
                 entryCode, node.parent?.parent ?? node.parent ?? node);
@@ -355,11 +351,5 @@ class BannedCodeLinter {
           return;
       }
     });
-  }
-
-  String? getParentSource(SimpleIdentifier node) {
-    final parentSource = node.staticElement?.librarySource;
-    final parentSourceName = parentSource?.uri.toString();
-    return parentSourceName;
   }
 }
