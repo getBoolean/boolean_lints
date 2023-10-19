@@ -10,6 +10,7 @@ void testingBannedCodeLint() {
   final bannedCodeUsage2 = BannedCodeUsage.test3();
   BannedCodeUsage.test3().test();
   bannedCodeUsage2.test();
+  // expect_lint: banned_code
   print(test2);
   print(bannedCodeUsage2.test4);
   test();
