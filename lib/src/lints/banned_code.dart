@@ -244,7 +244,7 @@ class BannedCodeLinter {
   }
 
   void banIdFromPackage(LintCode entryCode, String id, String package) {
-    // only match globals
+    // only matches globals
     context.registry.addSimpleIdentifier((node) {
       final name = node.name;
       if (name != id) {
@@ -268,7 +268,40 @@ class BannedCodeLinter {
     });
   }
 
-  void banIdFromClass(LintCode entryCode, String id, String className) {}
+  void banIdFromClass(LintCode entryCode, String id, String className) {
+    context.registry.addSimpleIdentifier((node) {
+      final name = node.name;
+      if (name != id) {
+        return;
+      }
+
+      final parent = node.parent;
+      final parentEntity =
+          parent!.childEntities.firstWhere((element) => element != node);
+      if (parentEntity is SimpleIdentifier) {
+        final parentType = parentEntity.staticType;
+        final parentElement = parentEntity.staticElement;
+        if (parentType != null) {
+          final parentTypeName =
+              parentType.getDisplayString(withNullability: false);
+          if (parentTypeName != className) {
+            return;
+          }
+        } else if (parentElement != null) {
+          final parentElementName = parentElement.name;
+          if (parentElementName != className) {
+            return;
+          }
+        } else {
+          return;
+        }
+      } else {
+        return;
+      }
+
+      reporter.reportErrorForNode(entryCode, node);
+    });
+  }
 
   void banClassFromPackage(
     LintCode entryCode,
