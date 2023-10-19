@@ -33,7 +33,30 @@ boolean_lints:
 
 ## Dart
 
-### avoid_hardcoded_strings
+### banned_code
+
+> **warning**
+
+Warn. Prevent usage of banned code in the project.
+
+```yaml
+boolean_lints:
+  rules:
+    banned_code:
+      # Default severity for all entries
+      severity: warning
+      entries:
+        - id: test # required
+          class_name: BannedCodeUsage
+          package: example
+          reason: "Banned code usage is not allowed"
+          # Override severity for this entry
+          severity: error
+```
+
+<!-- Disabled -->
+
+<!-- ### avoid_hardcoded_strings
 
 > **info * 🛠**
 
@@ -60,4 +83,4 @@ final title = 'My App'.hardcoded;
 
 ```dart
 final title = 'My App'; // LINT
-```
+``` -->

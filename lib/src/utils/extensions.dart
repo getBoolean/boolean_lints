@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/error/error.dart';
 import 'package:boolean_lints/src/utils/utils.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
@@ -113,4 +114,20 @@ extension UriToFileExtension on Uri {
 
 extension PathResolverExtension on CustomLintResolver {
   String get normlizedPath => normalizePath(path);
+}
+
+extension SimpleIdentifierParentSourceExtension on SimpleIdentifier {
+  String? get sourceUrl {
+    final parentSource = staticElement?.librarySource;
+    final parentSourceName = parentSource?.uri.toString();
+    return parentSourceName;
+  }
+}
+
+extension NamedTypeParentSourceExtension on NamedType {
+  String? get sourceUrl {
+    final parentSource = element?.librarySource;
+    final parentSourceName = parentSource?.uri.toString();
+    return parentSourceName;
+  }
 }
