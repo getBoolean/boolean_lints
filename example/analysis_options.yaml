@@ -18,12 +18,15 @@ boolean_lints:
     banned_code:
       severity: warning
       entries:
-        - id: test2
-          class_name: BannedCodeUsage
-          reason: "BannedCodeUsage.test2 is not allowed"
-        - id: test
-          class_name: BannedCodeUsage
-          reason: "BannedCodeUsage.test is not allowed"
+        - class_name: BannedCodeUsage
+          package: example
+          reason: "BannedCodeUsage is not allowed"
+        # - id: test2
+        #   class_name: BannedCodeUsage
+        #   reason: "BannedCodeUsage.test2 is not allowed"
+        # - id: test
+        #   class_name: BannedCodeUsage
+        #   reason: "BannedCodeUsage.test is not allowed"
         # - package: example
         #   id: test2
         #   reason: Do not use test2 from the example package

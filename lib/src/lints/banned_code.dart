@@ -302,7 +302,52 @@ class BannedCodeLinter {
     LintCode entryCode,
     String className,
     String package,
-  ) {}
+  ) {
+    context.registry.addSimpleIdentifier((node) {
+      final parent = node.parent;
+      final entityBeforeNode =
+          parent!.childEntities.firstWhere((element) => element != node);
+      switch (entityBeforeNode) {
+        case SimpleIdentifier(:final staticType?):
+          final parentTypeName =
+              staticType.getDisplayString(withNullability: false);
+          if (parentTypeName != className) {
+            return;
+          }
+        case SimpleIdentifier(:final staticElement?):
+          final parentElementName = staticElement.name;
+          if (parentElementName != className) {
+            return;
+          }
+        default:
+          return;
+      }
+
+      final parentSource = node.staticElement?.librarySource;
+      final parentSourceName = parentSource?.uri.toString();
+      if (!_matchesPackage(parentSourceName, package)) {
+        return;
+      }
+
+      reporter.reportErrorForNode(entryCode, parent);
+    });
+
+    context.registry.addNamedType((node) {
+      final nodeTypeName = node.name2.lexeme;
+      if (nodeTypeName != className) {
+        return;
+      }
+
+      final nodeSource = node.element?.librarySource;
+      final nodeSourceName = nodeSource?.uri.toString();
+      if (!_matchesPackage(nodeSourceName, package)) {
+        return;
+      }
+
+      reporter.reportErrorForNode(
+          entryCode, node.parent?.parent ?? node.parent ?? node);
+    });
+  }
 
   void banIdFromClassFromPackage(
     LintCode entryCode,
