@@ -18,9 +18,9 @@ boolean_lints:
       severity: warning
       entries:
         # Ban global id from any package
-        - id: test2
-          reason: "test methods and variables should not be used"
-          severity: info
+        # - id: test2
+        #   reason: "test methods and variables should not be used"
+        #   severity: info
 
 
         # - class_name: BannedCodeUsage
