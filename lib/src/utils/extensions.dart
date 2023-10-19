@@ -117,7 +117,7 @@ extension PathResolverExtension on CustomLintResolver {
 }
 
 extension SimpleIdentifierParentSourceExtension on SimpleIdentifier {
-  String? get parentSourceUrl {
+  String? get sourceUrl {
     final parentSource = staticElement?.librarySource;
     final parentSourceName = parentSource?.uri.toString();
     return parentSourceName;
@@ -125,7 +125,7 @@ extension SimpleIdentifierParentSourceExtension on SimpleIdentifier {
 }
 
 extension NamedTypeParentSourceExtension on NamedType {
-  String? get parentSourceUrl {
+  String? get sourceUrl {
     final parentSource = element?.librarySource;
     final parentSourceName = parentSource?.uri.toString();
     return parentSourceName;
