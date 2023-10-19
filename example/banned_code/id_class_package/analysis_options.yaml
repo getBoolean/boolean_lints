@@ -1,0 +1,26 @@
+include: package:lints/recommended.yaml
+
+analyzer:
+  plugins:
+    - custom_lint
+
+custom_lint:
+  rules:
+
+boolean_lints:
+  rules:
+    banned_code:
+      severity: warning
+      entries:
+        - id: test3
+          class_name: BannedCodeUsage
+          package: example
+          reason: "BannedCodeUsage.test3 from the example package is not allowed"
+        - id: test2
+          class_name: BannedCodeUsage
+          package: example
+          reason: "BannedCodeUsage.test2 from the example package is not allowed"
+        - id: test
+          class_name: BannedCodeUsage
+          package: example
+          reason: "BannedCodeUsage.test from the example package is not allowed"

@@ -6,7 +6,6 @@ analyzer:
 
 custom_lint:
   rules:
-    - avoid_hardcoded_strings: true
 
 boolean_lints:
   rules_exclude:
