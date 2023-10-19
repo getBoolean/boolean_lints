@@ -117,6 +117,7 @@ abstract class OptionsLintRule extends DartLintRule with _OptionsMixin {
 
 // Mixin on DartLintRule
 mixin _OptionsMixin {
+  // TODO: Refactor this to support multiple nested packages with different analysis_options.yaml files
   static Options _options = const Options();
   static bool _loaded = false;
   static final Completer<Options> _completer = Completer<Options>();
