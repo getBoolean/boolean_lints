@@ -12,7 +12,7 @@
   - [Disable one specific rule](#disable-one-specific-rule)
   - [Disable all lints by default](#disable-all-lints-by-default)
   - [Configuring Lints](#configuring-lints)
-  - [Running custom\_lints\_template in the terminal/CI](#running-boolean_lints-in-the-terminalci)
+  - [Running boolean\_lints in the terminal/CI](#running-boolean_lints-in-the-terminalci)
 - [All Lint Rules](#all-lint-rules)
 - [Contributing Guide](#contributing-guide)
   - [Creating Lints](#creating-lints)
