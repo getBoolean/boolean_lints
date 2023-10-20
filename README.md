@@ -1,7 +1,7 @@
 <!-- omit from toc -->
 # Custom Lints Template
 
-`boolean_lints` is a developer tool, designed to help stop common issue and simplify repetetive tasks. It adds various warnings with quick fixes and refactoring options.
+`boolean_lints` is a developer tool made using `custom_lint`, designed to help stop common issue and simplify repetetive tasks. It adds various warnings with quick fixes and refactoring options.
 
 ## Table of Contents
 
