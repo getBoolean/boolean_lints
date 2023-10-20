@@ -1,5 +1,5 @@
 <!-- omit from toc -->
-# Custom Lints Template
+# Boolean Lints
 
 `boolean_lints` is a developer tool made using `custom_lint`, designed to help stop common issues and simplify repetetive tasks. It adds various warnings with quick fixes and refactoring options.
 
@@ -7,7 +7,7 @@
 
 - [Table of Contents](#table-of-contents)
 - [Usage](#usage)
-  - [Installing custom\_lints\_template](#installing-boolean_lints)
+  - [Installing boolean\_lints](#installing-boolean_lints)
   - [Enabling/disabling lints](#enablingdisabling-lints)
   - [Disable one specific rule](#disable-one-specific-rule)
   - [Disable all lints by default](#disable-all-lints-by-default)
