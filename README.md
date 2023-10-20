@@ -62,13 +62,17 @@ analyzer:
 custom_lint:
   rules:
     # Explicitly disable one lint rule
-    - avoid_hardcoded_strings: false
+    - banned_code: false
 
 boolean_lints:
   rules:
-    avoid_hardcoded_strings:
-      minimum_length: 3
+    banned_code:
       severity: warning
+      entries:
+        - id: test4
+          class_name: BannedCodeUsage
+          package: id_class_package
+          reason: "BannedCodeUsage.test4 from the example package is not allowed"
 ```
 
 Note that you can both enable and disable lint rules at once.
@@ -83,15 +87,19 @@ analyzer:
 custom_lint:
   rules:
     # Enable one rule
-    - avoid_hardcoded_strings
+    - banned_code
     # Disable another
     - custom_lint_example: false
 
 boolean_lints:
   rules:
-    avoid_hardcoded_strings:
-      minimum_length: 3
+    banned_code:
       severity: warning
+      entries:
+        - id: test4
+          class_name: BannedCodeUsage
+          package: id_class_package
+          reason: "BannedCodeUsage.test4 from the example package is not allowed"
 ```
 
 ### Disable all lints by default
@@ -112,13 +120,17 @@ custom_lint:
   enable_all_lint_rules: false
   rules:
     # You can now enable one specific rule in the "rules" list
-    - avoid_hardcoded_strings
+    - banned_code
 
 boolean_lints:
   rules:
-    avoid_hardcoded_strings:
-      minimum_length: 3
+    banned_code:
       severity: warning
+      entries:
+        - id: test4
+          class_name: BannedCodeUsage
+          package: id_class_package
+          reason: "BannedCodeUsage.test4 from the example package is not allowed"
 ```
 
 ### Configuring Lints
