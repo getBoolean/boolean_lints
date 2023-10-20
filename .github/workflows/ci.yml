@@ -7,7 +7,7 @@ on:
       - feature/*
       - fix/*
       - chore/*
-      - dependabot/*
+      - dependabot/**
 
 env:
   FLUTTER_CHANNEL: "stable"
