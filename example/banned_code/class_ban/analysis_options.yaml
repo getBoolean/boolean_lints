@@ -1,0 +1,18 @@
+include: package:lints/recommended.yaml
+
+analyzer:
+  plugins:
+    - custom_lint
+
+custom_lint:
+  rules:
+
+boolean_lints:
+  rules:
+    banned_code:
+      severity: warning
+      entries:
+        - class_name: BannedCodeUsage
+          reason: "BannedCodeUsage is not allowed"
+        - class_name: UnmodifiableListView
+          reason: "UnmodifiableListView is not allowed"
