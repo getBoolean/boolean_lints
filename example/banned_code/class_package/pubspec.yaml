@@ -1,13 +1,11 @@
 name: class_package
 description: A sample command-line application.
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
 publish_to: none
 
 environment:
   sdk: ^3.1.3
 
-# Add regular dependencies here.
 dependencies:
   custom_lint: ^0.5.4
 

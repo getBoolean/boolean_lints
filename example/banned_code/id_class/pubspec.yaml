@@ -1,12 +1,10 @@
 name: id_class
 description: A starting point for Dart libraries or applications.
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
 
 environment:
   sdk: ^3.1.4
 
-# Add regular dependencies here.
 dependencies:
   custom_lint: ^0.5.4
 
