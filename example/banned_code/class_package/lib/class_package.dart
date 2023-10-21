@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 void testingBannedCodeLint() {
+  // expect_lint: banned_code
   final bannedCodeUsage = BannedCodeUsage();
   // expect_lint: banned_code
   BannedCodeUsage.test2();
@@ -49,6 +50,7 @@ class BannedCodeUsage {
   }
 
   factory BannedCodeUsage.test3() {
+    // expect_lint: banned_code
     return BannedCodeUsage();
   }
 }
