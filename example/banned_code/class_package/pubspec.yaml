@@ -1,4 +1,4 @@
-name: id_class_package
+name: class_package
 description: A sample command-line application.
 version: 1.0.0
 publish_to: none

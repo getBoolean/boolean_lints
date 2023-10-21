@@ -91,8 +91,8 @@ class BannedCodeLinter {
   final CustomLintContext context;
   final Options options;
 
-  bool _matchesPackage(String? parentSourceName, String package) {
-    return parentSourceName?.startsWith(package) ?? false;
+  bool _matchesPackage(String? parentSourceName, String? package) {
+    return package == null || (parentSourceName?.startsWith(package) ?? false);
   }
 
   void banId(
@@ -142,7 +142,7 @@ class BannedCodeLinter {
       }
 
       final parentSourceName = node.sourceUrl;
-      if (package != null && !_matchesPackage(parentSourceName, package)) {
+      if (!_matchesPackage(parentSourceName, package)) {
         return;
       }
 
@@ -187,7 +187,7 @@ class BannedCodeLinter {
       }
 
       final parentSourceName = node.sourceUrl;
-      if (package != null && !_matchesPackage(parentSourceName, package)) {
+      if (!_matchesPackage(parentSourceName, package)) {
         return;
       }
 
@@ -201,7 +201,7 @@ class BannedCodeLinter {
       }
 
       final parentSourceName = node.sourceUrl;
-      if (package != null && !_matchesPackage(parentSourceName, package)) {
+      if (!_matchesPackage(parentSourceName, package)) {
         return;
       }
 
@@ -234,7 +234,7 @@ class BannedCodeLinter {
           }
 
           final parentSourceName = node.sourceUrl;
-          if (package != null && _matchesPackage(parentSourceName, package)) {
+          if (_matchesPackage(parentSourceName, package)) {
             reporter.reportErrorForNode(entryCode, node.parent ?? node);
           }
         case SimpleIdentifier(:final staticElement?):
@@ -244,7 +244,7 @@ class BannedCodeLinter {
           }
 
           final parentSourceName = node.sourceUrl;
-          if (package != null && _matchesPackage(parentSourceName, package)) {
+          if (_matchesPackage(parentSourceName, package)) {
             reporter.reportErrorForNode(entryCode, node.parent ?? node);
           }
         case NamedType(:final element?):
@@ -254,7 +254,7 @@ class BannedCodeLinter {
           }
 
           final parentSourceName = node.sourceUrl;
-          if (package != null && _matchesPackage(parentSourceName, package)) {
+          if (_matchesPackage(parentSourceName, package)) {
             reporter.reportErrorForNode(
                 entryCode, node.parent?.parent ?? node.parent ?? node);
           }
