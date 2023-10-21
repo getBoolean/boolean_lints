@@ -54,27 +54,25 @@ scripts:
       dependsOn: custom_lint
 
   upgrade:
-    run: |
-      dart pub upgrade
-      melos run upgrade:pkg --no-select
+    run: melos run upgrade:pkg --no-select
     description: Run `dart pub upgrade` in all packages.
 
   upgrade:pkg:
     run: dart pub upgrade
     exec:
       failFast: true
+      concurrency: 1
     description: Run `dart pub upgrade` in the selected package.
 
   upgrade-major:
-    run: |
-      dart pub upgrade
-      melos run upgrade:pkg --no-select
+    run: melos run upgrade:pkg --no-select
     description: Run `dart pub upgrade --major-versions` in all packages.
 
   upgrade-major:pkg:
     run: dart pub upgrade --major-versions
     exec:
       failFast: true
+      concurrency: 1
     description: Run `dart pub upgrade --major-versions` in the selected package.
 
   format:
