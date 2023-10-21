@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 void testingBannedCodeLint() {
   final bannedCodeUsage = BannedCodeUsage();
   // expect_lint: banned_code
@@ -18,6 +20,13 @@ void testingBannedCodeLint() {
   // expect_lint: banned_code
   print(bannedCodeUsage2.test4);
   test();
+
+  // expect_lint: banned_code
+  final unmodifiable = UnmodifiableListView([1, 2, 3]);
+
+  // expect_lint: banned_code
+  final first = unmodifiable.first;
+  print(first);
 }
 
 const test2 = 'Hello World';

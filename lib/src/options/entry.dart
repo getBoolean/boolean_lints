@@ -10,7 +10,7 @@ class EntryOption with EntryOptionMappable {
   const EntryOption({
     this.className,
     this.id,
-    this.package,
+    this.source,
     this.severity,
     this.reason,
   });
@@ -19,7 +19,7 @@ class EntryOption with EntryOptionMappable {
 
   final String? id;
 
-  final String? package;
+  final String? source;
 
   @MappableField(hook: ErrorSeverityHook())
   final ErrorSeverity? severity;

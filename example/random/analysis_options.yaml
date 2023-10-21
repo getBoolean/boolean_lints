@@ -24,7 +24,7 @@ boolean_lints:
 
 
         # - class_name: BannedCodeUsage
-        #   package: example
+        #   source: package:example
         #   reason: "BannedCodeUsage is not allowed"
         # - id: test2
         #   class_name: BannedCodeUsage
@@ -35,13 +35,13 @@ boolean_lints:
         # - id: test
         #   class_name: BannedCodeUsage
         #   reason: "BannedCodeUsage.test is not allowed"
-        # - package: example
+        # - source: package:example
         #   id: test2
         #   reason: Do not use test2 from the example package
-        # - package: example
+        # - source: package:example
         #   id: test
         #   reason: Do not use test from the example package
-        # - package: example
+        # - source: package:example
         #   reason: Do not use the example package
         # - id: test
         #   reason: "test methods are not allowed"
@@ -52,11 +52,11 @@ boolean_lints:
         # - class_name: BannedCodeUsage
         #   id: test
         #   reason: "Banned code usage is not allowed"
-        #   package: example
+        #   source: package:example
         # - class_name: BannedCodeUsage
         #   id: test2
         #   reason: "Banned code usage 2 is not allowed"
-        #   package: example
+        #   source: package:example
         # - id: test3
         #   class_name: BannedCodeUsage
         #   reason: "BannedCodeUsage.test3 is not allowed"
@@ -68,13 +68,13 @@ boolean_lints:
         #   reason: "BannedCodeUsage.test is not allowed"
         # - id: test3
         #   class_name: BannedCodeUsage
-        #   package: example
+        #   source: package:example
         #   reason: "BannedCodeUsage.test3 from the example package is not allowed"
         # - id: test2
         #   class_name: BannedCodeUsage
-        #   package: example
+        #   source: package:example
         #   reason: "BannedCodeUsage.test2 from the example package is not allowed"
         # - id: test
         #   class_name: BannedCodeUsage
-        #   package: example
+        #   source: package:example
         #   reason: "BannedCodeUsage.test from the example package is not allowed"

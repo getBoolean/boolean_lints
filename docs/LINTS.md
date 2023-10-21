@@ -6,7 +6,7 @@
 - [Table of Contents](#table-of-contents)
 - [Configuring Lints](#configuring-lints)
 - [Dart](#dart)
-  - [avoid\_hardcoded\_strings](#avoid_hardcoded_strings)
+  - [banned\_code](#banned_code)
 
 ## Configuring Lints
 
@@ -48,7 +48,7 @@ boolean_lints:
       entries:
         - id: test
           class_name: BannedCodeUsage
-          package: example
+          source: package:example
           reason: "BannedCodeUsage.test from the example package is not allowed"
           # Override severity for this entry
           severity: error
