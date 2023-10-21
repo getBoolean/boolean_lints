@@ -1,0 +1,17 @@
+include: package:lints/recommended.yaml
+
+analyzer:
+  plugins:
+    - custom_lint
+
+custom_lint:
+  rules:
+
+boolean_lints:
+  rules:
+    banned_code:
+      severity: warning
+      entries:
+        - id: test
+          source: package:id_source
+          reason: "test methods from package:id_source is not allowed"
