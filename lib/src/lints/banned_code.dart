@@ -229,8 +229,9 @@ class BannedCodeLinter {
       switch (entityBeforeNode) {
         case InstanceCreationExpression(:final staticType?):
         case SimpleIdentifier(:final staticType?):
-          final parentTypeName =
-              staticType.getDisplayString(withNullability: false);
+          // final parentTypeName =
+          //     staticType.getDisplayString(withNullability: false);
+          final parentTypeName = staticType.element?.name;
           if (parentTypeName != className) {
             return;
           }
