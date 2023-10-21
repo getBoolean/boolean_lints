@@ -48,20 +48,20 @@ class BannedCodeRule extends OptionsLintRule {
 
       switch (entry) {
         // all non null
-        case EntryOption(:final id?, :final className?, source: final package?):
-          linter.banIdFromClassFromPackage(entryCode, id, className, package);
+        case EntryOption(:final id?, :final className?, :final source?):
+          linter.banIdFromClassFromSource(entryCode, id, className, source);
 
         // two non nulls
-        case EntryOption(:final className?, source: final package?):
-          linter.banClassFromPackage(entryCode, className, package);
+        case EntryOption(:final className?, :final source?):
+          linter.banClassFromSource(entryCode, className, source);
         case EntryOption(:final id?, :final className?):
           linter.banIdFromClass(entryCode, id, className);
-        case EntryOption(:final id?, source: final package?):
-          linter.banIdFromPackage(entryCode, id, package);
+        case EntryOption(:final id?, :final source?):
+          linter.banIdFromSource(entryCode, id, source);
 
         // one non null
-        case EntryOption(source: final package?):
-          linter.banPackage(entryCode, package);
+        case EntryOption(:final source?):
+          linter.banSource(entryCode, source);
         case EntryOption(:final className?):
           linter.banClass(entryCode, className);
         case EntryOption(:final id?):
@@ -91,28 +91,28 @@ class BannedCodeLinter {
   final CustomLintContext context;
   final Options options;
 
-  bool _matchesPackage(String? parentSourceName, String? package) {
-    return package == null || (parentSourceName?.startsWith(package) ?? false);
+  bool _matchesSource(String? parentSourceName, String? source) {
+    return source == null || (parentSourceName?.startsWith(source) ?? false);
   }
 
   void banId(
     LintCode entryCode,
     String id,
   ) {
-    banIdFromPackage(entryCode, id);
+    banIdFromSource(entryCode, id);
   }
 
   void banClass(
     LintCode entryCode,
     String className,
   ) {
-    banClassFromPackage(entryCode, className);
+    banClassFromSource(entryCode, className);
   }
 
-  void banPackage(LintCode entryCode, String package) {
+  void banSource(LintCode entryCode, String package) {
     context.registry.addSimpleIdentifier((node) {
       final parentSourceName = node.sourceUrl;
-      if (!_matchesPackage(parentSourceName, package)) {
+      if (!_matchesSource(parentSourceName, package)) {
         return;
       }
 
@@ -125,7 +125,7 @@ class BannedCodeLinter {
 
     context.registry.addNamedType((node) {
       final parentSourceName = node.sourceUrl;
-      if (!_matchesPackage(parentSourceName, package)) {
+      if (!_matchesSource(parentSourceName, package)) {
         return;
       }
 
@@ -133,7 +133,7 @@ class BannedCodeLinter {
     });
   }
 
-  void banIdFromPackage(LintCode entryCode, String id, [String? package]) {
+  void banIdFromSource(LintCode entryCode, String id, [String? source]) {
     // only matches globals
     context.registry.addSimpleIdentifier((node) {
       final name = node.name;
@@ -142,7 +142,7 @@ class BannedCodeLinter {
       }
 
       final parentSourceName = node.sourceUrl;
-      if (!_matchesPackage(parentSourceName, package)) {
+      if (!_matchesSource(parentSourceName, source)) {
         return;
       }
 
@@ -158,15 +158,20 @@ class BannedCodeLinter {
   }
 
   void banIdFromClass(LintCode entryCode, String id, String className) {
-    banIdFromClassFromPackage(entryCode, id, className);
+    banIdFromClassFromSource(entryCode, id, className);
   }
 
-  void banClassFromPackage(
+  void banClassFromSource(
     LintCode entryCode,
     String className, [
-    String? package,
+    String? source,
   ]) {
     context.registry.addSimpleIdentifier((node) {
+      final parentSourceName = node.sourceUrl;
+      if (!_matchesSource(parentSourceName, source)) {
+        return;
+      }
+
       final parent = node.parent;
       final entityBeforeNode =
           parent!.childEntities.firstWhere((element) => element != node);
@@ -184,11 +189,6 @@ class BannedCodeLinter {
           }
         default:
           return;
-      }
-
-      final parentSourceName = node.sourceUrl;
-      if (!_matchesPackage(parentSourceName, package)) {
-        return;
       }
 
       reporter.reportErrorForNode(entryCode, parent);
@@ -201,7 +201,7 @@ class BannedCodeLinter {
       }
 
       final parentSourceName = node.sourceUrl;
-      if (!_matchesPackage(parentSourceName, package)) {
+      if (!_matchesSource(parentSourceName, source)) {
         return;
       }
 
@@ -210,15 +210,20 @@ class BannedCodeLinter {
     });
   }
 
-  void banIdFromClassFromPackage(
+  void banIdFromClassFromSource(
     LintCode entryCode,
     String id,
     String className, [
-    String? package,
+    String? source,
   ]) {
     context.registry.addSimpleIdentifier((node) {
       final name = node.name;
       if (name != id) {
+        return;
+      }
+
+      final parentSourceName = node.sourceUrl;
+      if (!_matchesSource(parentSourceName, source)) {
         return;
       }
 
@@ -233,33 +238,22 @@ class BannedCodeLinter {
             return;
           }
 
-          final parentSourceName = node.sourceUrl;
-          if (_matchesPackage(parentSourceName, package)) {
-            reporter.reportErrorForNode(entryCode, node.parent ?? node);
-          }
+          reporter.reportErrorForNode(entryCode, node.parent ?? node);
         case SimpleIdentifier(:final staticElement?):
           final parentElementName = staticElement.name;
           if (parentElementName != className) {
             return;
           }
 
-          final parentSourceName = node.sourceUrl;
-          if (_matchesPackage(parentSourceName, package)) {
-            reporter.reportErrorForNode(entryCode, node.parent ?? node);
-          }
+          reporter.reportErrorForNode(entryCode, node.parent ?? node);
         case NamedType(:final element?):
           final parentTypeName = element.name;
           if (parentTypeName != className) {
             return;
           }
 
-          final parentSourceName = node.sourceUrl;
-          if (_matchesPackage(parentSourceName, package)) {
-            reporter.reportErrorForNode(
-                entryCode, node.parent?.parent ?? node.parent ?? node);
-          }
-        default:
-          return;
+          reporter.reportErrorForNode(
+              entryCode, node.parent?.parent ?? node.parent ?? node);
       }
     });
   }
