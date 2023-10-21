@@ -5,7 +5,6 @@ class BannedCodeUsage {
   }
 
   factory BannedCodeUsage.testFactory() {
-    // expect_lint: banned_code
     return BannedCodeUsage();
   }
 }
