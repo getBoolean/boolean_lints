@@ -48,19 +48,19 @@ class BannedCodeRule extends OptionsLintRule {
 
       switch (entry) {
         // all non null
-        case EntryOption(:final id?, :final className?, :final package?):
+        case EntryOption(:final id?, :final className?, source: final package?):
           linter.banIdFromClassFromPackage(entryCode, id, className, package);
 
         // two non nulls
-        case EntryOption(:final className?, :final package?):
+        case EntryOption(:final className?, source: final package?):
           linter.banClassFromPackage(entryCode, className, package);
         case EntryOption(:final id?, :final className?):
           linter.banIdFromClass(entryCode, id, className);
-        case EntryOption(:final id?, :final package?):
+        case EntryOption(:final id?, source: final package?):
           linter.banIdFromPackage(entryCode, id, package);
 
         // one non null
-        case EntryOption(:final package?):
+        case EntryOption(source: final package?):
           linter.banPackage(entryCode, package);
         case EntryOption(:final className?):
           linter.banClass(entryCode, className);
@@ -92,7 +92,7 @@ class BannedCodeLinter {
   final Options options;
 
   bool _matchesPackage(String? parentSourceName, String package) {
-    return parentSourceName?.startsWith('package:$package') ?? false;
+    return parentSourceName?.startsWith(package) ?? false;
   }
 
   void banId(

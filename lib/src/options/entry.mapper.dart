@@ -24,9 +24,9 @@ class EntryOptionMapper extends ClassMapperBase<EntryOption> {
       Field('className', _$className, key: 'class_name', opt: true);
   static String? _$id(EntryOption v) => v.id;
   static const Field<EntryOption, String> _f$id = Field('id', _$id, opt: true);
-  static String? _$package(EntryOption v) => v.package;
-  static const Field<EntryOption, String> _f$package =
-      Field('package', _$package, opt: true);
+  static String? _$source(EntryOption v) => v.source;
+  static const Field<EntryOption, String> _f$source =
+      Field('source', _$source, opt: true);
   static ErrorSeverity? _$severity(EntryOption v) => v.severity;
   static const Field<EntryOption, ErrorSeverity> _f$severity =
       Field('severity', _$severity, opt: true, hook: ErrorSeverityHook());
@@ -38,7 +38,7 @@ class EntryOptionMapper extends ClassMapperBase<EntryOption> {
   final Map<Symbol, Field<EntryOption, dynamic>> fields = const {
     #className: _f$className,
     #id: _f$id,
-    #package: _f$package,
+    #source: _f$source,
     #severity: _f$severity,
     #reason: _f$reason,
   };
@@ -49,7 +49,7 @@ class EntryOptionMapper extends ClassMapperBase<EntryOption> {
     return EntryOption(
         className: data.dec(_f$className),
         id: data.dec(_f$id),
-        package: data.dec(_f$package),
+        source: data.dec(_f$source),
         severity: data.dec(_f$severity),
         reason: data.dec(_f$reason));
   }
@@ -110,7 +110,7 @@ abstract class EntryOptionCopyWith<$R, $In extends EntryOption, $Out>
   $R call(
       {String? className,
       String? id,
-      String? package,
+      String? source,
       ErrorSeverity? severity,
       String? reason});
   EntryOptionCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
@@ -128,13 +128,13 @@ class _EntryOptionCopyWithImpl<$R, $Out>
   $R call(
           {Object? className = $none,
           Object? id = $none,
-          Object? package = $none,
+          Object? source = $none,
           Object? severity = $none,
           Object? reason = $none}) =>
       $apply(FieldCopyWithData({
         if (className != $none) #className: className,
         if (id != $none) #id: id,
-        if (package != $none) #package: package,
+        if (source != $none) #source: source,
         if (severity != $none) #severity: severity,
         if (reason != $none) #reason: reason
       }));
@@ -142,7 +142,7 @@ class _EntryOptionCopyWithImpl<$R, $Out>
   EntryOption $make(CopyWithData data) => EntryOption(
       className: data.get(#className, or: $value.className),
       id: data.get(#id, or: $value.id),
-      package: data.get(#package, or: $value.package),
+      source: data.get(#source, or: $value.source),
       severity: data.get(#severity, or: $value.severity),
       reason: data.get(#reason, or: $value.reason));
 

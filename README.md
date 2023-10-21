@@ -71,7 +71,7 @@ boolean_lints:
       entries:
         - id: test4
           class_name: BannedCodeUsage
-          package: id_class_package
+          source: package:id_class_package
           reason: "BannedCodeUsage.test4 from the example package is not allowed"
 ```
 
@@ -98,7 +98,7 @@ boolean_lints:
       entries:
         - id: test4
           class_name: BannedCodeUsage
-          package: id_class_package
+          source: package:id_class_package
           reason: "BannedCodeUsage.test4 from the example package is not allowed"
 ```
 
@@ -129,7 +129,7 @@ boolean_lints:
       entries:
         - id: test4
           class_name: BannedCodeUsage
-          package: id_class_package
+          source: package:id_class_package
           reason: "BannedCodeUsage.test4 from the example package is not allowed"
 ```
 
