@@ -37,7 +37,18 @@ boolean_lints:
 
 > **warning**
 
-Warn. Prevent usage of banned code in the project.
+Warn. Prevent *usage* of banned code in the project. All entry options are optional, specifying each
+option will narrow the scope of the lint. If no options are specified, the lint will be ignored.
+
+- `severity`: Changes the default lint severity for all entries.
+- `entries`
+  - `source`: Limits lints to a specific source, e.g. `package:example` or `dart:io`.
+    If `id` or `class_name` is not specified, the lint will be applied to everything from the source.
+  - `class_name`: Lint for *usage* of all members of the class.
+  - `id`: Lint a specific variable/method from a class if `class_name` is specified, otherwise it will only lint globals.
+  - `reason`: Why the code should not be used and what should be used instead.
+  - `severity`: Override the lint severity for this entry.
+- plus the options mentioned in [Configuring Lints](#configuring-lints)
 
 ```yaml
 boolean_lints:
@@ -50,7 +61,6 @@ boolean_lints:
           class_name: BannedCodeUsage
           source: package:example
           reason: "BannedCodeUsage.test from the example package is not allowed"
-          # Override severity for this entry
           severity: error
 ```
 
