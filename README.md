@@ -1,7 +1,7 @@
 <!-- omit from toc -->
 # Boolean Lints
 
-`boolean_lints` is a developer tool made using `custom_lint`, designed to help stop common issues and simplify repetetive tasks. It adds various warnings with quick fixes and refactoring options. At the moment, the only lint rule enabled is [banned_code](doc/LINTS.md#banned_code).
+`boolean_lints` is a developer tool made using `custom_lint`, designed to help stop common issues and simplify repetetive tasks. It aims to adds various warnings with quick fixes and refactoring options. At the moment, the only lint rule enabled is [banned_code](doc/LINTS.md#banned_code).
 
 ## Table of Contents
 
