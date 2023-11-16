@@ -1,3 +1,3 @@
 ## 1.0.0
 
-- Initial version.
+- Initial release with `banned_code` lint.
