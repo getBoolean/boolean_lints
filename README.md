@@ -18,6 +18,7 @@
   - [Creating Lints](#creating-lints)
   - [Creating Assists](#creating-assists)
   - [Debugging/Testing](#debuggingtesting)
+- [Semantic Versioning Policy](#semantic-versioning-policy)
 - [Resources](#resources)
 
 ## Usage
@@ -222,6 +223,27 @@ type `assist` and use snippet to generate the boilerplate code.
 ### Debugging/Testing
 
 Follow the [custom_lint debugging/testing docs](https://pub.dev/packages/custom_lint#using-the-dart-debugger).
+
+## Semantic Versioning Policy
+
+`boolean_lints` follows [semantic versioning](https://semver.org/).
+
+Major:
+
+- New lint rules are added
+- Lint is enabled by default (previously disabled by default).
+- Lint configuration options changed
+
+Minor:
+
+- New lint rule added (disabled by default)
+- New fix/assist added
+- Lint configuration option added (without changing the default behavior)
+
+Patch:
+
+- Bug fixes
+- Documentation updates
 
 ## Resources
 
