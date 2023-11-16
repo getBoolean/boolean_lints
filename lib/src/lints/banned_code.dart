@@ -91,8 +91,12 @@ class BannedCodeLinter {
   final CustomLintContext context;
   final Options options;
 
-  bool _matchesSource(String? parentSourceName, String? source) {
-    return source == null || (parentSourceName?.startsWith(source) ?? false);
+  bool _matchesSource(String? parentSourcePath, String source) {
+    if (parentSourcePath == null) {
+      return false;
+    }
+
+    return parentSourcePath.split('/').first == source;
   }
 
   void banId(
@@ -142,7 +146,7 @@ class BannedCodeLinter {
       }
 
       final parentSourceName = node.sourceUrl;
-      if (!_matchesSource(parentSourceName, source)) {
+      if (source != null && !_matchesSource(parentSourceName, source)) {
         return;
       }
 
@@ -168,7 +172,7 @@ class BannedCodeLinter {
   ]) {
     context.registry.addSimpleIdentifier((node) {
       final parentSourceName = node.sourceUrl;
-      if (!_matchesSource(parentSourceName, source)) {
+      if (source != null && !_matchesSource(parentSourceName, source)) {
         return;
       }
 
@@ -201,7 +205,7 @@ class BannedCodeLinter {
       }
 
       final parentSourceName = node.sourceUrl;
-      if (!_matchesSource(parentSourceName, source)) {
+      if (source != null && !_matchesSource(parentSourceName, source)) {
         return;
       }
 
@@ -223,7 +227,7 @@ class BannedCodeLinter {
       }
 
       final parentSourceName = node.sourceUrl;
-      if (!_matchesSource(parentSourceName, source)) {
+      if (source != null && !_matchesSource(parentSourceName, source)) {
         return;
       }
 
