@@ -1,7 +1,7 @@
 <!-- omit from toc -->
 # Boolean Lints
 
-`boolean_lints` is a developer tool made using `custom_lint`, designed to help stop common issues and simplify repetetive tasks. It adds various warnings with quick fixes and refactoring options.
+`boolean_lints` is a developer tool made using `custom_lint`, designed to help stop common issues and simplify repetetive tasks. It adds various warnings with quick fixes and refactoring options. At the moment, the only lint rule enabled is [banned_code](doc/LINTS.md#banned_code).
 
 ## Table of Contents
 
@@ -182,9 +182,9 @@ dart run custom_lint
 ## All Lint Rules
 
 Most lints have configuration options. These can be specified in the `analysis_options.yaml` or the `pubspec.yaml`.
-See [LINTS.md](docs/LINTS.md) for a list of implemented lint rules and their configuration options.
+See [LINTS.md](doc/LINTS.md) for a list of implemented lint rules and their configuration options.
 
-- [banned_code](docs/LINTS.md#banned_code)
+- [banned_code](doc/LINTS.md#banned_code)
 
 ## Contributing Guide
 
@@ -210,7 +210,7 @@ and `OptionsAssist` classes.
     1. Add the new options class to the [lib/src/options/rules.dart](lib/src/options/rules.dart)
     constructor with named parameters.
     1. Run `dart pub run build_runner build` to generate the new [dart_mappable](https://pub.dev/packages/dart_mappable) classes.
-1. Update [LINTS.md](docs/LINTS.md) with the new lint and configuration options.
+1. Update [LINTS.md](doc/LINTS.md) with the new lint and configuration options.
 
 ### Creating Assists
 
