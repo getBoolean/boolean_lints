@@ -7,6 +7,7 @@ import 'package:boolean_lints/src/options/banned_code.dart';
 import 'package:boolean_lints/src/options/entry.dart';
 import 'package:boolean_lints/src/options_plugin_base.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:path/path.dart' as path;
 
 class BannedCodeRule extends OptionsLintRule {
   BannedCodeRule() : super(code: _code);
@@ -91,12 +92,28 @@ class BannedCodeLinter {
   final CustomLintContext context;
   final Options options;
 
-  bool _matchesSource(String? parentSourcePath, String source) {
+  bool _matchesSource(String? parentSourcePath, String sourceToMatch) {
     if (parentSourcePath == null) {
       return false;
     }
 
-    return parentSourcePath.split('/').first == source;
+    final libraryPathParts = parentSourcePath.split('/');
+    final libraryName = libraryPathParts.first;
+
+    final sourceLibraryPathParts = sourceToMatch.split('/');
+    final sourceLibraryName = sourceLibraryPathParts.first;
+
+    final matchesLibraryName = libraryName == sourceLibraryName;
+    final shouldLintFileFromSource = sourceLibraryPathParts.length > 1;
+    if (shouldLintFileFromSource) {
+      final sourceFile = (sourceLibraryPathParts..removeAt(0)).join('/');
+      final libraryFile = (libraryPathParts..removeAt(0)).join('/');
+
+      final matchesFile = path.equals(sourceFile, libraryFile);
+      return matchesLibraryName && matchesFile;
+    }
+
+    return matchesLibraryName;
   }
 
   void banId(
