@@ -3,6 +3,7 @@
 - **Breaking:** Migrated to new options format, options are now defined under the `custom_lint` key.
 - **Breaking:** Removed `boolean_lints.rules_exclude` option as it is redundant with the analyzer's
   exclude option.
+- Raised minimum Dart SDK version to `3.2.0`.
 
 Before:
 
