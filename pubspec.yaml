@@ -1,11 +1,11 @@
 name: boolean_lints
 description: boolean_lints is a developer tool, designed to help stop common issue and simplify repetetive tasks. It adds various warnings with quick fixes and refactoring options.
-version: 1.0.2
+version: 2.0.0
 repository: https://github.com/getBoolean/boolean_lints
 issue_tracker: https://github.com/getBoolean/boolean_lints/issues
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: ">=3.2.0 <4.0.0"
 
 dependencies:
   analyzer: ">=5.12.0 <7.0.0"
@@ -13,6 +13,7 @@ dependencies:
   collection: ^1.16.0
   custom_lint_builder: ">=0.4.0 <0.6.0"
   dart_mappable: ">=3.0.1 <5.0.0"
+  glob: ^2.1.2
   meta: ^1.7.0
   path: ^1.8.1
   pub_semver: ^2.1.4

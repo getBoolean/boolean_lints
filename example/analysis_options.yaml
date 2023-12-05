@@ -1,0 +1,16 @@
+include: ../analysis_options.yaml
+
+analyzer:
+  plugins:
+    - custom_lint
+
+custom_lint:
+  rules:
+    - banned_code:
+      severity: info
+      entries:
+        - class_name: Future
+          id: wait
+          source: dart:async
+          reason: "Future.wait should be avoided because it looses type safety for the results. Use a Record's `wait` method instead."
+          severity: warning
