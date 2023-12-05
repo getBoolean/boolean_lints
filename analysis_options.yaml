@@ -1,5 +1,6 @@
 include: all_lint_rules.yaml
 analyzer:
+  exclude: [example/**]
   language:
     strict-casts: true
     strict-inference: true
@@ -22,7 +23,7 @@ linter:
 
     # Low value and lacks a quick fix
     combinators_ordering: false
-    
+
     # Low value and high cost to change on all files
     eol_at_end_of_file: false
 
