@@ -64,16 +64,6 @@ custom_lint:
   rules:
     # Explicitly disable one lint rule
     - banned_code: false
-
-boolean_lints:
-  rules:
-    banned_code:
-      severity: warning
-      entries:
-        - id: test4
-          class_name: BannedCodeUsage
-          source: package:id_class_package
-          reason: "BannedCodeUsage.test4 from the example package is not allowed"
 ```
 
 Note that you can both enable and disable lint rules at once.
@@ -91,16 +81,6 @@ custom_lint:
     - banned_code
     # Disable another
     - custom_lint_example: false
-
-boolean_lints:
-  rules:
-    banned_code:
-      severity: warning
-      entries:
-        - id: test4
-          class_name: BannedCodeUsage
-          source: package:id_class_package
-          reason: "BannedCodeUsage.test4 from the example package is not allowed"
 ```
 
 ### Disable all lints by default
@@ -122,22 +102,11 @@ custom_lint:
   rules:
     # You can now enable one specific rule in the "rules" list
     - banned_code
-
-boolean_lints:
-  rules:
-    banned_code:
-      severity: warning
-      entries:
-        - id: test4
-          class_name: BannedCodeUsage
-          source: package:id_class_package
-          reason: "BannedCodeUsage.test4 from the example package is not allowed"
 ```
 
 ### Configuring Lints
 
-Some of the lints have configurations. These can be specified in the `analysis_options.yaml`
-or the `pubspec.yaml` file under the top level key `boolean_lints:`.
+Some of the lints have configuration options. These can be specified in `analysis_options.yaml`.
 
 All lints have the following options:
 
@@ -146,16 +115,14 @@ All lints have the following options:
 - `exclude`: Skip linting files matching these regular expressions.
 
 ```yaml
-boolean_lints:
-  rules_exclude:
-    - "test/.*\\.dart"
+custom_lint:
   rules:
-    example_lint_code:
+    - example_lint_code:
       severity: info
       include:
-        - "lib/.*\\.dart"
+        - "lib/**.dart"
       exclude:
-        - "lib/.*_temp\\.dart"
+        - "lib/**_temp.dart"
 ```
 
 ### Running boolean_lints in the terminal/CI
@@ -191,34 +158,28 @@ See [LINTS.md](doc/LINTS.md) for a list of implemented lint rules and their conf
 
 ### Creating Lints
 
-1. Create a new file with the lint name in [lib/src/lints](lib/src/lints),
+1. Create a new file with the lint name in `lib/src/lints/{lint_name}/`,
 type `lint` and use snippet to generate the boilerplate code.
 1. Add the lint logic to the `OptionsLintRule.run` method.
 1. (Optional) Adding a fix for the lint
-    1. Create a fix file in the [lib/src/lints/fixes](lib/src/lints/fixes), type `fix` and
+    1. Create a fix file in the `lib/src/lints/{lint_name}/models/fixes`, type `fix` and
     use the snippet to generate the boilerplate code.
-    1. Add it to the lint's `OptionsLintRule.getFixes` method.
+    2. Add it to the lint's `OptionsLintRule.getFixes` method.
 1. Add the lint to the [lib/lints.dart](lib/lints.dart) `getAllLints` method. Type
 `fix` and use the lint to generate the boilerplate code.
-1. (Optional) Adding configuration options. These options are available with the `options` getter in the `OptionsLintRule`
-and `OptionsAssist` classes.
-    1. Create a new file for each key in [lib/src/options/](lib/src/options/),
+1. (Optional) Adding configuration options. These options are available with the `config.parameters` getter in the `OptionsLintRule`
+and `OptionsFix` classes.
+    1. Create a new file for each key in `lib/src/lints/{lint_name}/models/`,
     type `options` and use the snippet to generate the boilerplate code.
-    1. Add the mixin `OptionsMixin` to the option class and add fields `List<String> excludes`
-    and `List<String> includes` to add rule path configuration.
-        - In your lint classes, use `options.rules.lintName.shouldSkipFile` to skip excluded/non-included files.
-        - Also use `options.isFileRuleExcluded` to skip excluded files that were excluded from all lints.
-    1. Add the new options class to the [lib/src/options/rules.dart](lib/src/options/rules.dart)
-    constructor with named parameters.
-    1. Run `dart pub run build_runner build` to generate the new [dart_mappable](https://pub.dev/packages/dart_mappable) classes.
+    2. Add the new options class to the lint rule `paramsParser` and the super class `OptionsLintRule` generic type parameter.
+    3. Run `dart run build_runner build -d` to generate the new [dart_mappable](https://pub.dev/packages/dart_mappable) classes.
 1. Update [LINTS.md](doc/LINTS.md) with the new lint and configuration options.
 
 ### Creating Assists
 
 1. Create a new file with the lint name in [lib/src/assists](lib/src/assists),
 type `assist` and use snippet to generate the boilerplate code.
-2. Add the assist to the [lib/lints.dart](lib/lints.dart) `getAllAssists` method.
-3. (Optional) Adding configuration options. Follow [Creating Lints Step 3](#creating-lints).
+1. Add the assist to the [lib/custom_lints_template.dart](lib/custom_lints_template.dart) `getAllAssists` method.
 
 ### Debugging/Testing
 

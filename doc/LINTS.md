@@ -21,14 +21,14 @@ All lints have the following options:
 - `exclude`: Skip linting files matching these regular expressions.
 
 ```yaml
-boolean_lints:
+custom_lint:
   rules:
-    example_lint_code:
+    - example_lint_code:
       severity: info
       include:
-        - "lib/.*\\.dart"
+        - "lib/**.dart"
       exclude:
-        - "lib/.*_temp\\.dart"
+        - "lib/**_temp.dart"
 ```
 
 ## Dart
@@ -53,7 +53,7 @@ option will narrow the scope of the lint. If no options are specified, the lint 
 ```yaml
 boolean_lints:
   rules:
-    banned_code:
+    - banned_code:
       # Default severity for all entries
       severity: warning
       entries:
